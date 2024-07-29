@@ -27,7 +27,7 @@ jobs:
 
       - name: Determine Next Version
         if: github.ref == 'refs/heads/main'
-        id: next-version
+        id: semantic-version
         run: |
           node get-next-version.mjs > output.txt
           version=$(grep 'VERSION_OUTPUT' output.txt | cut -d '=' -f2)
@@ -36,8 +36,17 @@ jobs:
           rm output.txt  # Clean up
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Construct Final Build Version
+        id: build-version
+        run: |
+          if [ "${{ steps.semantic-version.outputs.version }}" != "" ]; then
+            echo "version=${{ steps.semantic-version.outputs.version }}-${{ steps.sha.outputs.sha }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=${{ steps.sha.outputs.sha }}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Build Project
         run: npm run build
         env:
-          VERSION: ${{ steps.next-version.outputs.version }}-${{ steps.sha.outputs.sha }}
+          VERSION: ${{ steps.build-version.outputs.version }}
