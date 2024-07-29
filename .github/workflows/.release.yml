@@ -28,7 +28,12 @@ jobs:
       - name: Determine Next Version
         if: github.ref == 'refs/heads/main'
         id: next-version
-        run: echo "version=$(node get-next-version.mjs)" >> $GITHUB_OUTPUT 
+        run: |
+          node get-next-version.mjs > output.txt
+          version=$(grep 'VERSION_OUTPUT' output.txt | cut -d '=' -f2)
+          echo "version=$version" >> $GITHUB_OUTPUT
+          cat output.txt  # Optional: to display all logs
+          rm output.txt  # Clean up
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

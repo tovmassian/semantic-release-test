@@ -25,7 +25,11 @@ async function getNextVersion() {
   if (result) {
     console.log(``);
   } else {
-    console.log(result ? result.nextRelease.version : 'No release needed.');
+    console.log(
+      result
+        ? `VERSION_OUTPUT=${result.nextRelease.version}`
+        : 'No release needed.'
+    );
   }
 }
 
