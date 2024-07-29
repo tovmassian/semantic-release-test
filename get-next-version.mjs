@@ -23,9 +23,9 @@ async function getNextVersion() {
   );
 
   if (result) {
-    console.log(`version=${result.nextRelease.version} >> $GITHUB_OUTPUT`);
+    console.log(``);
   } else {
-    console.log('No release needed.');
+    console.log(result ? result.nextRelease.version : 'No release needed.');
   }
 }
 
