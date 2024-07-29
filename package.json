@@ -1,0 +1,12 @@
+{
+  "name": "semantic-release-test",
+  "version": "1.0.0",
+  "description": "test semantic release generated build version",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
