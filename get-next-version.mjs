@@ -4,7 +4,7 @@ async function getNextVersion() {
   const result = await semanticRelease(
     {
       branches: ['main'],
-      repositoryUrl: 'https://github.com/yourusername/your-repository.git',
+      repositoryUrl: 'https://github.com/tovmassian/semantic-release-test.git',
       plugins: [
         '@semantic-release/commit-analyzer',
         '@semantic-release/release-notes-generator',
