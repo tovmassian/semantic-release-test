@@ -1,4 +1,4 @@
-const semanticRelease = require('semantic-release');
+import semanticRelease from 'semantic-release';
 
 async function getNextVersion() {
   const result = await semanticRelease(
@@ -17,7 +17,6 @@ async function getNextVersion() {
       dryRun: true,
     },
     {
-      // This is necessary to avoid the ERELEASEBRANCHES error on non-main branches
       cwd: process.cwd(),
       env: { ...process.env, CI: true },
     }
