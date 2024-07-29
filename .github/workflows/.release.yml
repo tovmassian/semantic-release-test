@@ -1,27 +1,38 @@
-name: Release
+name: Build and Release
 
 on:
   push:
     branches:
       - main
+      - develop  # Included for future use
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Semantic Release
-        id: semantic
-        uses: cycjimmy/semantic-release-action@v4
+      - name: Get Short SHA
+        id: sha
+        run: echo "sha=$(git rev-parse --short=7 HEAD)" >> $GITHUB_OUTPUT"
+
+      - name: Determine Next Version
+        if: github.ref == 'refs/heads/main'  # Only run this step on main branch
+        id: next-version
+        run: node get-next-version.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Frontend
-        run: npm run build -- --env.VERSION=${{ steps.semantic.outputs.new_release_version }}
+      - name: Build Project
+        run: npm run build
+        env:
+          VERSION: ${{ steps.next-version.outputs.version }}-${{ steps.sha.outputs.sha }}

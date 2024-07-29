@@ -4,9 +4,15 @@
   "description": "test semantic release generated build version",
   "main": "build.js",
   "scripts": {
+    "build": "echo Version: $VERSION",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/release-notes-generator": "^14.0.1",
+    "semantic-release": "^24.0.0"
+  }
 }
