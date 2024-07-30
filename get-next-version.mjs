@@ -10,7 +10,6 @@ async function getNextVersion() {
         '@semantic-release/commit-analyzer',
         '@semantic-release/release-notes-generator',
       ],
-      dryRun: true,
     },
     {
       cwd: process.cwd(),
