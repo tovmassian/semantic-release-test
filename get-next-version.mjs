@@ -8,11 +8,6 @@ async function getNextVersion() {
       plugins: [
         '@semantic-release/commit-analyzer',
         '@semantic-release/release-notes-generator',
-        {
-          // Dummy publisher to avoid actual publishing
-          path: '@semantic-release/npm',
-          npmPublish: false,
-        },
       ],
       dryRun: true,
     },
