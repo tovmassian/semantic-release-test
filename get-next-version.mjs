@@ -1,5 +1,6 @@
 import semanticRelease from 'semantic-release';
 
+
 async function getNextVersion() {
   const result = await semanticRelease(
     {
@@ -20,7 +21,7 @@ async function getNextVersion() {
   console.log(
     result
       ? `VERSION_OUTPUT=${result.nextRelease.version}`
-      : 'No release needed.'
+      : 'Oups!, No release needed'
   );
 }
 
