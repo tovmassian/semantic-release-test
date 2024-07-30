@@ -20,7 +20,7 @@ async function getNextVersion() {
   console.log(
     result
       ? `VERSION_OUTPUT=${result.nextRelease.version}`
-      : 'Oups!, No release needed'
+      : 'Oeps!, No release needed'
   );
 }
 
